@@ -1,6 +1,5 @@
 package com.crashExams365.physics.Fragments.Launch
 
-import android.content.ActivityNotFoundException
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
