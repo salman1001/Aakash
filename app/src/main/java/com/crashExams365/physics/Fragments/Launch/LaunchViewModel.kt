@@ -162,7 +162,7 @@ class LaunchViewModel(application: Application) : AndroidViewModel(application),
 
         }
         else{
-            iNewCatLoad.onCatLoadFailed("No Internet Habibi")
+            iNewCatLoad.onCatLoadFailed("No Internet ")
 
         }
 
