@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".Fragments.AskNewDoubts.AskNewDoubtsFragment">
+
+
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/myasking"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:id="@+id/myll"
+
+
+        android:weightSum="5">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:fitsSystemWindows="true"
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="3"
+
+            android:background="#CAC6C6"
+            android:layout_marginBottom="@dimen/_5sdp"
+
+            android:layout_height="0dp">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:id="@+id/pick_IMAGE"
+                android:src="@drawable/askkk"
+                app:riv_corner_radius="@dimen/_6sdp"
+
+                >
+
+
+            </com.makeramen.roundedimageview.RoundedImageView>
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/getimage"-->
+<!--                -->
+<!--                android:layout_margin="@dimen/_10sdp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+
+
+<!--                -->
+<!--                android:src="@drawable/askkk" />-->
+
+        </LinearLayout>
+
+                <LinearLayout
+            android:layout_width="match_parent"
+                    android:layout_weight="2"
+
+
+            android:background="@color/white"
+            android:layout_marginBottom="@dimen/_5sdp"
+
+            android:layout_height="0dp">
+
+                    <EditText
+                        android:id="@+id/optionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:background="@color/white"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:gravity="start"
+                        android:hint="Add Optional Information Here...."
+
+                        android:lineSpacingExtra="@dimen/_6sdp"
+                        android:textColor="@color/black"
+                        android:textColorHint="#090909"
+                        android:textSize="@dimen/_16ssp" />
+
+                </LinearLayout>
+
+
+
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+
+<!--            -->
+<!--            android:layout_marginRight="@dimen/_3sdp">-->
+
+<!--&lt;!&ndash;            <com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/optionText"&ndash;&gt;-->
+
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                &ndash;&gt;-->
+
+
+
+<!--&lt;!&ndash;                android:hint="Mention Something if it's Necessary"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:inputType="text"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        </com.google.android.material.textfield.TextInputLayout>&ndash;&gt;-->
+
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/myll"
+        android:id="@+id/myasking"
+        android:background="#F6F8FA"
+
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_14sdp"
+            android:fontFamily="@font/ubuntu_bold"
+
+            android:layout_alignParentBottom="true"
+            android:id="@+id/buttonsubmit"
+            android:text="Ask"
+            style="@style/Widget.MaterialComponents.Button"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="@dimen/_14sdp"
+            android:visibility="gone"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/prosub"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

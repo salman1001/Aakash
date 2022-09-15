@@ -43,6 +43,7 @@ class MyCatAdpater(var context:Context,var catList:List<CatModel>):RecyclerView.
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.cat_name!!.text = catList[position].name
         when(catList[position].id){
+            100->{holder.cat_image!!.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.doubuuuts))}
             1->{holder.cat_image!!.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.bookstack111111))}
             2->{holder.cat_image!!.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.p2))}
             3->{holder.cat_image!!.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.previ11111111111111))}

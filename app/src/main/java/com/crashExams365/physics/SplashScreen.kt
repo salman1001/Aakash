@@ -5,11 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.opengl.Visibility
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.crashExams365.physics.common.UserInfo
@@ -48,7 +51,9 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initilize()
+
         delaySplashScreen()
+
 
     }
 
@@ -69,6 +74,7 @@ class SplashScreen : AppCompatActivity() {
             val user=myfirebaseAuth.currentUser
 
             if (user!=null){
+
                 checkUserFromFirebase()
 
             }
@@ -128,14 +134,25 @@ class SplashScreen : AppCompatActivity() {
 
 
 
+
+
+
+
     }
     private val getResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
+                firebaseAuth.removeAuthStateListener(listener)
+
+
+
+//                val button=findViewById<Button>(R.id.btn_google)
+//                button.visibility=View.GONE
 
                    checkUserFromFirebase()
+
             }
             else{
                 finish()

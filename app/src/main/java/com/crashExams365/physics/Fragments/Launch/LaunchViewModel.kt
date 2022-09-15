@@ -151,6 +151,7 @@ class LaunchViewModel(application: Application) : AndroidViewModel(application),
 //                        categorylist.add(catModel!!)
 //                    }
                     val myNewCategoryModel:MyNewCategoryModel=snapshot.getValue(MyNewCategoryModel::class.java)!!
+                    myNewCategoryModel.Category!!.add(2,CatModel(100,"s","Doubts"))
                     iNewCatLoad.onsucess(myNewCategoryModel)
                 }
 

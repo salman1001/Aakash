@@ -14,8 +14,8 @@ android {
         applicationId "com.crashExams365.physics"
         minSdk 21
         targetSdk 31
-        versionCode 14
-        versionName "1.1.41"
+        versionCode 20
+        versionName "1.1.50"
 
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -84,6 +84,14 @@ dependencies {
 
 
     implementation 'com.google.android.gms:play-services-ads:20.6.0'
+
+    implementation 'androidx.core:core-splashscreen:1.0.0-alpha02'
+
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+
+    implementation 'com.vmadalin:easypermissions-ktx:1.0.0'
+
 
 
 

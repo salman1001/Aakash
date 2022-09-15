@@ -175,17 +175,7 @@ class LaunchFragment : Fragment(R.layout.launch_fragment) {
                 binding.imageSlider.startAutoCycle()
               //  binding.imageSlider
 
-                launchViewModel.getCatList().observe(viewLifecycleOwner,{
-                    mycheck=it.status
 
-                    binding.prolaunch.visibility=View.GONE
-                    binding.view.visibility=View.VISIBLE
-                    binding.holder.visibility=View.VISIBLE
-                    adpater = MyCatAdpater(requireContext(), it.Category!!)
-                    binding.recCat.adapter = adpater
-                    binding.recCat.layoutAnimation=layoutAnimationController
-                    binding.prolaunch.visibility = View.GONE
-                })
 
 
             }
@@ -194,6 +184,21 @@ class LaunchFragment : Fragment(R.layout.launch_fragment) {
                 showdialog()
             }
         })
+
+        launchViewModel.getCatList().observe(viewLifecycleOwner,{
+            mycheck=it.status
+
+            binding.prolaunch.visibility=View.GONE
+            binding.view.visibility=View.VISIBLE
+            binding.holder.visibility=View.VISIBLE
+            adpater = MyCatAdpater(requireContext(), it.Category!!)
+            binding.recCat.adapter = adpater
+            binding.recCat.layoutAnimation=layoutAnimationController
+            binding.prolaunch.visibility = View.GONE
+        })
+
+
+
     }
 
 //////////////////////////////////////////////     DO INITIALIZING   //////////////////////////////////////////////////////////////////////////////////////////
@@ -221,62 +226,64 @@ class LaunchFragment : Fragment(R.layout.launch_fragment) {
             toggle.syncState()
             binding.navView!!.setNavigationItemSelectedListener {
                 if (versionFromBack==versionno){
-                    if (mInterstitialAd != null) {
-                        mInterstitialAd?.show(requireActivity())
+                    if (it.itemId==R.id.nav_share) goShare()
+                    else{
+                        if (mInterstitialAd != null) {
+                            mInterstitialAd?.show(requireActivity())
+                        }
+
+                        when (it.itemId) {
+
+
+
+                            R.id.nav_chapters ->{
+                                val action = LaunchFragmentDirections.actionLaunchFragmentToChapterFragment()
+                                navController!!.navigate(action)
+                            }
+                            R.id.nav_hcverma ->{
+                                val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","Hc Verma")
+                                navController!!.navigate(action)
+                            }
+                            R.id.nav_dc->{
+                                val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","Dc Pandey")
+                                navController!!.navigate(action)
+                            }
+                            R.id.nav_iro ->{
+                                val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","IE IRODOV")
+                                navController!!.navigate(action)
+                            }
+
+
+                            R.id.nav_prev ->{
+                                val action = LaunchFragmentDirections.actionLaunchFragmentToTestYearRep("NONE")
+                                navController!!.navigate(action)
+                            }
+                            R.id.nav_req ->{
+                                val action = LaunchFragmentDirections.actionLaunchFragmentToRequestFragment()
+                                navController!!.navigate(action)
+
+                            }
+                            R.id.nav_jeenoti->{
+                                val action = LaunchFragmentDirections.actionLaunchFragmentToNotificationFragment()
+                                navController!!.navigate(action)
+                            }
+                            R.id.nav_cutoff->{
+                                val action = LaunchFragmentDirections.actionLaunchFragmentToTestYearRep("ResultsRank")
+                                navController!!.navigate(action)
+                            }
+                            R.id.nav_tests->{
+                                val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("Tests","TestTypes")
+                                navController!!.navigate(action)
+                            }
+
+
+                            R.id.nav_rate->{
+                                goreview()
+                            }
+
+                        }
                     }
 
-                    when (it.itemId) {
-
-
-
-                        R.id.nav_chapters ->{
-                            val action = LaunchFragmentDirections.actionLaunchFragmentToChapterFragment()
-                            navController!!.navigate(action)
-                        }
-                        R.id.nav_hcverma ->{
-                            val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","Hc Verma")
-                            navController!!.navigate(action)
-                        }
-                        R.id.nav_dc->{
-                            val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","Dc Pandey")
-                            navController!!.navigate(action)
-                        }
-                        R.id.nav_iro ->{
-                            val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","IE IRODOV")
-                            navController!!.navigate(action)
-                        }
-
-
-                        R.id.nav_prev ->{
-                            val action = LaunchFragmentDirections.actionLaunchFragmentToTestYearRep("NONE")
-                            navController!!.navigate(action)
-                        }
-                        R.id.nav_req ->{
-                            val action = LaunchFragmentDirections.actionLaunchFragmentToRequestFragment()
-                            navController!!.navigate(action)
-
-                        }
-                        R.id.nav_jeenoti->{
-                            val action = LaunchFragmentDirections.actionLaunchFragmentToNotificationFragment()
-                            navController!!.navigate(action)
-                        }
-                        R.id.nav_cutoff->{
-                            val action = LaunchFragmentDirections.actionLaunchFragmentToTestYearRep("ResultsRank")
-                            navController!!.navigate(action)
-                        }
-                        R.id.nav_tests->{
-                            val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("Tests","TestTypes")
-                            navController!!.navigate(action)
-                        }
-
-
-                        R.id.nav_rate->{
-                            goreview()
-                        }
-                        R.id.nav_share->{
-                            goShare()
-                        }
-                    }
 
                 }
                 else{
@@ -399,60 +406,68 @@ class LaunchFragment : Fragment(R.layout.launch_fragment) {
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     fun onLaunchCategoryClicked(event: LaunchCategoryClick) {
         if (event.issuccess) {
+            if (event.catModel.name=="Share") goShare()
+            else{
+
+                if (mInterstitialAd != null) {
+                    mInterstitialAd?.show(requireActivity())
+                }
 
 
-            if (mInterstitialAd != null) {
-                mInterstitialAd?.show(requireActivity())
+
+                when (event.catModel.name) {
+                    "Chapters" -> {
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToChapterFragment()
+                        navController!!.navigate(action)
+                    }
+                    "Request" -> {
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToRequestFragment()
+                        navController!!.navigate(action)
+
+                    }
+                    "Notification" -> {
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToNotificationFragment()
+                        navController!!.navigate(action)
+                    }
+                    "Tests" -> {
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("Tests","TestTypes")
+                        navController!!.navigate(action)
+                    }
+                    "Previous" -> {
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToTestYearRep("NONE")
+                        navController!!.navigate(action)
+                    }
+                    "Hc Verma" -> {
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","Hc Verma")
+                        navController!!.navigate(action)
+                    }
+                    "IE IRODOV" -> {
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","IE IRODOV")
+                        navController!!.navigate(action)
+                    }
+                    "Dc Pandey" -> {
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","Dc Pandey")
+                        navController!!.navigate(action)
+                    }
+                    "CutOff"->{
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToTestYearRep("ResultsRank")
+                        navController!!.navigate(action)
+
+                    }
+                    "Rate"->{
+                        goreview()
+                    }
+
+                    "Doubts"->{
+                        val action = LaunchFragmentDirections.actionLaunchFragmentToDoubtsFragment()
+                        navController!!.navigate(action)
+
+                    }
+                }
+
             }
 
 
-
-            when (event.catModel.name) {
-                "Chapters" -> {
-                    val action = LaunchFragmentDirections.actionLaunchFragmentToChapterFragment()
-                    navController!!.navigate(action)
-                }
-                "Request" -> {
-                    val action = LaunchFragmentDirections.actionLaunchFragmentToRequestFragment()
-                    navController!!.navigate(action)
-
-                }
-                "Notification" -> {
-                    val action = LaunchFragmentDirections.actionLaunchFragmentToNotificationFragment()
-                    navController!!.navigate(action)
-                }
-                "Tests" -> {
-                    val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("Tests","TestTypes")
-                    navController!!.navigate(action)
-                }
-                "Previous" -> {
-                    val action = LaunchFragmentDirections.actionLaunchFragmentToTestYearRep("NONE")
-                    navController!!.navigate(action)
-                }
-                "Hc Verma" -> {
-                    val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","Hc Verma")
-                    navController!!.navigate(action)
-                }
-                "IE IRODOV" -> {
-                    val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","IE IRODOV")
-                    navController!!.navigate(action)
-                }
-                "Dc Pandey" -> {
-                    val action = LaunchFragmentDirections.actionLaunchFragmentToTopicsInChap("NONE","Dc Pandey")
-                    navController!!.navigate(action)
-                }
-                "CutOff"->{
-                    val action = LaunchFragmentDirections.actionLaunchFragmentToTestYearRep("ResultsRank")
-                    navController!!.navigate(action)
-
-                }
-                "Rate"->{
-                    goreview()
-                }
-                "Share"->{
-                    goShare()
-                }
-            }
 
             }
     }
